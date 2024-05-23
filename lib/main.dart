@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MagicBall());
@@ -12,17 +13,30 @@ class MagicBall extends StatefulWidget {
 }
 
 class _MagicBallState extends State<MagicBall> {
+  int ballNumber = 2;
+  void randomBall() {
+    setState(() {
+                ballNumber = Random().nextInt(5) + 1;
+              });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.brown,
-          title: const Center(
-            child: Text("Magic 8 Ball"),
+          backgroundColor: Colors.blue,
+          appBar: AppBar(
+            backgroundColor: Colors.blue.shade900,
+            title:
+                Text(style: TextStyle(color: Colors.white), "Ask Me Anything"),
           ),
-        ),
-      ),
+          body: TextButton(
+            onPressed: () {
+              randomBall();
+            },
+            child: Center(
+              child: Image.asset('images/ball$ballNumber.png'),
+            ),
+          )),
     );
   }
 }
